@@ -27,6 +27,44 @@ namespace Roommates
                 Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
             }
 
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Room with Id 1");
+
+            Room singleRoom = roomRepo.GetById(1);
+
+            Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
+
+            Room bathroom = new Room
+            {
+                Name = "Bathroom",
+                MaxOccupancy = 1
+            };
+
+            roomRepo.Insert(bathroom);
+
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Added the new Room with id {bathroom.Id}");
+
+
+            // UPDATE
+            new Room
+            {
+                Name = "Bathroom2",
+                MaxOccupancy = 2
+            };
+
+            roomRepo.Update(bathroom);
+
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Added the new Room with id {bathroom.Id} 2");
+
+
+            // DELETE
+            roomRepo.Delete(10);
+
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Deleted Room with id {bathroom.Id} 3");
+
         }
     }
 }
