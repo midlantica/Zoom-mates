@@ -34,6 +34,7 @@ namespace Roommates
 
             Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
 
+            // INSERT 
             Room bathroom = new Room
             {
                 Name = "Bathroom",
