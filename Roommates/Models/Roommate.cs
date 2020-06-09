@@ -9,6 +9,7 @@ namespace Roommates.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int RentPortion { get; set; }
+        public int RoomId { get; set; }
         public DateTime MoveInDate { get; set; }
         public Room Room { get; set; }
     }

@@ -99,7 +99,7 @@ namespace Roommates.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT FirstName, LastName, RentPortion, MoveInDate FROM Roommate WHERE Id = @id";
+                    cmd.CommandText = "SELECT FirstName, LastName, RentPortion, MoveInDate, RoomId FROM Roommate WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -112,7 +112,9 @@ namespace Roommates.Repositories
                         {
                             Id = id,
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             RentPortion = reader.GetInt32(reader.GetOrdinal("RentPortion")),
+                            RoomId = reader.GetInt32(reader.GetOrdinal("RoomId")),
                         };
                     }
 
@@ -137,14 +139,14 @@ namespace Roommates.Repositories
                 {
                     // These SQL parameters are annoying. Why can't we use string interpolation?
                     // ... sql injection attacks!!!
-                    cmd.CommandText = @"INSERT INTO Roommate (FirstName, LastName, RentPortion, MoveInDate, Room) 
+                    cmd.CommandText = @"INSERT INTO Roommate (FirstName, LastName, RentPortion, MoveInDate, RoomId) 
                                         OUTPUT INSERTED.Id 
-                                        VALUES (@firstName, @lastname, @rentPortion, @moveInDate, @room)";
+                                        VALUES (@firstName, @lastname, @rentPortion, @moveInDate, @roomId)";
                     cmd.Parameters.AddWithValue("@firstName", roommate.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", roommate.FirstName);
                     cmd.Parameters.AddWithValue("@rentPortion", roommate.RentPortion);
                     cmd.Parameters.AddWithValue("@moveInDate", roommate.MoveInDate);
-                    cmd.Parameters.AddWithValue("@roomId", roommate.Room);
+                    cmd.Parameters.AddWithValue("@roomId", roommate.RoomId);
                     int id = (int)cmd.ExecuteScalar();
 
                     roommate.Id = id;

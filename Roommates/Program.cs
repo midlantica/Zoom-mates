@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Roommates.Models;
 using Roommates.Repositories;
 
@@ -55,18 +56,30 @@ namespace Roommates
             Console.WriteLine($"Added the new Room with id {bathroom.Id}");
 
             // INSERT ROOMATE
-            Roommate jimmy = new Roommate
+            // INSERT ROOMATE
+            // INSERT ROOMATE
+            string userTypedFirstName = Console.ReadLine();
+            string userTypedLastName = Console.ReadLine();
+            int userTypedRentPortion = Int32.Parse(Console.ReadLine());
+
+            // Roomsssssss...
+            List<Room> someRooms = roomRepo.GetAll();
+            Room aRoom = someRooms.First()
+            // int userTypedRoomId = Int32.Parse(Console.ReadLine());
+;
+            Roommate newRoommate = new Roommate
             {
-                FirstName = "Jimmy",
-                LastName = "Jackson",
-                RentPortion = 100,
-                MoveInDate = DateTime.Now
+                FirstName = userTypedFirstName,
+                LastName = userTypedLastName,
+                RentPortion = userTypedRentPortion,
+                MoveInDate = DateTime.Now.AddDays(-1),
+                Room = aRoom
             };
-            roommateRepo.Insert(jimmy);
+            
             Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Added the new Room with id {jimmy.Id}");
-
-
+            Console.WriteLine($"Added the new Room with id {newRoommate.Id}");
+            //Console.ReadLine($"First name: {userTypedFirstName}");
+            RoommateRepository.Insert(newRoommate);
 
             // UPDATE
             new Room
