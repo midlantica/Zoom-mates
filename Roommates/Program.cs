@@ -76,10 +76,11 @@ namespace Roommates
                 Room = aRoom
             };
             
+            RoommateRepository.Insert(newRoommate);
+
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Added the new Room with id {newRoommate.Id}");
             //Console.ReadLine($"First name: {userTypedFirstName}");
-            RoommateRepository.Insert(newRoommate);
 
             // UPDATE
             new Room
