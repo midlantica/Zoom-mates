@@ -32,27 +32,40 @@ namespace Roommates
             List<Roommate> allRoommates = roommateRepo.GetAll();
             foreach (Roommate roommate in allRoommates)
             {
-                Console.WriteLine($"{roommate.Id} {roommate.Firstname} {roommate.RentPortion}");
+                Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion}");
             }
 
+            // Getting Room with Id 1
             Console.WriteLine("----------------------------");
             Console.WriteLine("Getting Room with Id 1");
-
             Room singleRoom = roomRepo.GetById(1);
-
             Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
 
-            // INSERT 
-            Room bathroom = new Room
-            {
-                Name = "Bathroom",
-                MaxOccupancy = 1
-            };
 
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Roommate with Id 1");
+            Roommate singleRoommate = roommateRepo.GetById(1);
+            Console.WriteLine($"{singleRoommate.Id} {singleRoommate.FirstName} {singleRoommate.LastName} {singleRoommate.RentPortion}");
+
+
+            // INSERT ROOM
+            Room bathroom = new Room { Name = "Bathroom", MaxOccupancy = 1 };
             roomRepo.Insert(bathroom);
-
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Added the new Room with id {bathroom.Id}");
+
+            // INSERT ROOMATE
+            Roommate jimmy = new Roommate
+            {
+                FirstName = "Jimmy",
+                LastName = "Jackson",
+                RentPortion = 100,
+                MoveInDate = DateTime.Now
+            };
+            roommateRepo.Insert(jimmy);
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Added the new Room with id {jimmy.Id}");
+
 
 
             // UPDATE
@@ -61,16 +74,13 @@ namespace Roommates
                 Name = "Bathroom2",
                 MaxOccupancy = 2
             };
-
             roomRepo.Update(bathroom);
-
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Added the new Room with id {bathroom.Id} 2");
 
 
             // DELETE
             roomRepo.Delete(10);
-
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Deleted Room with id {bathroom.Id} 3");
 
