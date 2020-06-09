@@ -16,15 +16,23 @@ namespace Roommates
         static void Main(string[] args)
         {
             RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+            RoommateRepository roommateRepo = new RoommateRepository(CONNECTION_STRING);
 
             Console.WriteLine("Getting All Rooms:");
             Console.WriteLine();
-
             List<Room> allRooms = roomRepo.GetAll();
-
             foreach (Room room in allRooms)
             {
                 Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
+            }
+            
+            // >> Roommates
+            Console.WriteLine("Getting All Rooms:");
+            Console.WriteLine();
+            List<Roommate> allRoommates = roommateRepo.GetAll();
+            foreach (Roommate roommate in allRoommates)
+            {
+                Console.WriteLine($"{roommate.Id} {roommate.Firstname} {roommate.RentPortion}");
             }
 
             Console.WriteLine("----------------------------");

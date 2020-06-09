@@ -153,7 +153,7 @@ namespace Roommates.Repositories
                 {
                     cmd.CommandText = @"UPDATE Room
                                     SET Name = @name,
-                                        MaxOccupancy = @maxOccupancy
+                                    MaxOccupancy = @maxOccupancy
                                     WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@name", room.Name);
                     cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);

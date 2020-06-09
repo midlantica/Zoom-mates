@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Roommates.Repositories
 {
     /// <summary>
-    ///  This class is responsible for interacting with Room data.
+    ///  This class is responsible for interacting with Roommate data.
     ///  It inherits from the BaseRepository class so that it can use the BaseRepository's Connection property
     /// </summary>
     public class RoommateRepository : BaseRepository
@@ -13,6 +13,8 @@ namespace Roommates.Repositories
         /// <summary>
         ///  When new RoommateRespository is instantiated, pass the connection string along to the BaseRepository
         /// </summary>
+        public RoommateRepository(string connectionString) : base(connectionString) { }
+
 
         /// <summary>
         ///  Get a list of all Roommates in the database
@@ -128,9 +130,9 @@ namespace Roommates.Repositories
                     // ... sql injection attacks!!!
                     cmd.CommandText = @"INSERT INTO Roommate (Name, RentPortion) 
                                         OUTPUT INSERTED.Id 
-                                        VALUES (@name, @RentPortion)";
+                                        VALUES (@name, @rentPortion)";
                     cmd.Parameters.AddWithValue("@name", roommate.Firstname);
-                    cmd.Parameters.AddWithValue("@RentPortion", roommate.RentPortion);
+                    cmd.Parameters.AddWithValue("@rentPortion", roommate.RentPortion);
                     int id = (int)cmd.ExecuteScalar();
 
                     roommate.Id = id;
